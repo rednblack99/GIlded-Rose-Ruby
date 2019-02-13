@@ -11,3 +11,4 @@ describe GildedRose do
   end
 
 end
+
