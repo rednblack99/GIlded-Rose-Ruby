@@ -49,7 +49,7 @@ describe GildedRose do
 
   context "Sulfuras" do
     before(:each) do
-      @items = [Item.new("Sulfuras, Hand of Ragnaros", 0, 50)]
+      @items = [Item.new("Sulfuras, Hand of Ragnaros", 0, 50), Item.new("cat", 5, 5)]
       @gilded_rose = GildedRose.new(@items)
       @gilded_rose.update_quality
     end
@@ -60,6 +60,10 @@ describe GildedRose do
 
     it "sell-in value drops by 1 per day" do
       expect(@items[0].sell_in).to eq 0
+    end
+
+    it "reduces quality of item after" do
+      expect(@items[1].quality).to eq 4
     end
   end
 
