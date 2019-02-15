@@ -50,9 +50,8 @@ class GildedRose
   end
 
   def update_backstage_passes(item_quality, item_sell_in)
-    if item_sell_in.negative?
-      0
-    elsif item_sell_in.between?(0, 5)
+    return 0 if item_sell_in.negative?
+    if item_sell_in.between?(0, 5)
       item_quality + 3
     elsif item_sell_in.between?(0, 10)
       item_quality + 2
