@@ -37,7 +37,7 @@ describe GildedRose do
       @gilded_rose.update_quality
     end
 
-    it "increases in value" do
+    it "increases in value by 1" do
       expect(@items[0].quality).to eq 50
     end
 
@@ -45,6 +45,14 @@ describe GildedRose do
       @gilded_rose.update_quality
       expect(@items[0].quality).to eq 50
     end
+
+    # it "increases in value by 2 when sell-in less than 0" do
+    #   @items2 = [Item.new("Aged Brie", -2, 10)]
+    #   @gilded_rose2 = GildedRose.new(@items)
+    #   @gilded_rose2.update_quality
+    #   expect(@items2[0].quality).to eq 12
+    # end
+
   end
 
   context "Sulfuras" do
