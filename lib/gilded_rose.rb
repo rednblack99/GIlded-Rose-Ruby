@@ -18,30 +18,29 @@ class GildedRose
       end
       item.sell_in = item.sell_in - 1 unless sulfuras?(item)
          
-      if item.sell_in.negative?
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality.negative?
-              item.quality = item.quality - 1
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
-      end
+      # if item.sell_in.negative?
+      #   if item.name != "Aged Brie"
+      #     if item.name != "Backstage passes to a TAFKAL80ETC concert"
+      #     else
+      #       item.quality = item.quality - item.quality
+      #     end
+      #   else
+      #     if item.quality < 50
+      #       item.quality = item.quality + 1
+      #     end
+      #   end
+      # end
     end
   end
+
+  private
 
   def sulfuras?(item)
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
   def reduce_quality(item_quality)
-    item_quality.between?(1, 50) ? item_quality - 1 : item_quality
+    item_quality.negative? ? item_quality - 2 : item_quality.between?(1, 50) ? item_quality - 1 : item_quality
   end
 
   def aged_brie?(item)
