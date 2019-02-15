@@ -6,7 +6,7 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       if sulfuras?(item)
       elsif aged_brie?(item)
@@ -17,8 +17,7 @@ class GildedRose
         item.quality = reduce_quality(item.quality)
       end
       item.sell_in = item.sell_in - 1 unless sulfuras?(item)
-        
-        
+         
       if item.sell_in < 0
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
@@ -67,7 +66,6 @@ class GildedRose
     else
       item_quality < 50 ? item_quality + 1 : item_quality
     end
-
   end
 
 end
