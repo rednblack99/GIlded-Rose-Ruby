@@ -8,13 +8,12 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      if sulfuras?(item)
-      elsif aged_brie?(item)
+      if aged_brie?(item)
         item.quality = update_aged_brie(item.quality, item.sell_in)
       elsif backstage_passes?(item)
         item.quality = update_backstage_passes(item.quality, item.sell_in)
       else
-        item.quality = reduce_quality(item.quality)
+        item.quality = reduce_quality(item.quality) unless sulfuras?(item)
       end
       item.sell_in = item.sell_in - 1 unless sulfuras?(item)
     end
