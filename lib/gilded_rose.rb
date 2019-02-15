@@ -10,26 +10,13 @@ class GildedRose
     @items.each do |item|
       if sulfuras?(item)
       elsif aged_brie?(item)
-        item.quality = update_aged_brie(item.quality)
+        item.quality = update_aged_brie(item.quality, item.sell_in)
       elsif backstage_passes?(item)
         item.quality = update_backstage_passes(item.quality, item.sell_in)
       else
         item.quality = reduce_quality(item.quality)
       end
       item.sell_in = item.sell_in - 1 unless sulfuras?(item)
-         
-      # if item.sell_in.negative?
-      #   if item.name != "Aged Brie"
-      #     if item.name != "Backstage passes to a TAFKAL80ETC concert"
-      #     else
-      #       item.quality = item.quality - item.quality
-      #     end
-      #   else
-      #     if item.quality < 50
-      #       item.quality = item.quality + 1
-      #     end
-      #   end
-      # end
     end
   end
 
@@ -40,15 +27,23 @@ class GildedRose
   end
 
   def reduce_quality(item_quality)
-    item_quality.negative? ? item_quality - 2 : item_quality.between?(1, 50) ? item_quality - 1 : item_quality
+    if item_quality.negative?
+      item_quality - 2
+    else
+      item_quality.between?(1, 50) ? item_quality - 1 : item_quality
+    end
   end
 
   def aged_brie?(item)
     item.name == "Aged Brie"
   end
 
-  def update_aged_brie(item_quality)
-    item_quality < 50 ? item_quality + 1 : item_quality
+  def update_aged_brie(item_quality, item_sell_in)
+    if item_sell_in.negative?
+      item_quality + 2 unless item_quality + 2 > 50
+    else
+      item_quality < 50 ? item_quality + 1 : item_quality
+    end
   end
 
   def backstage_passes?(item)
