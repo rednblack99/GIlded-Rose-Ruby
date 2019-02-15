@@ -18,10 +18,10 @@ class GildedRose
       end
       item.sell_in = item.sell_in - 1 unless sulfuras?(item)
          
-      if item.sell_in < 0
+      if item.sell_in.negative?
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
+            if item.quality.negative?
               item.quality = item.quality - 1
             end
           else
@@ -41,7 +41,7 @@ class GildedRose
   end
 
   def reduce_quality(item_quality)
-    item_quality.between?(1, 50) ? item_quality-1 : item_quality
+    item_quality.between?(1, 50) ? item_quality - 1 : item_quality
   end
 
   def aged_brie?(item)
@@ -57,7 +57,7 @@ class GildedRose
   end
 
   def update_backstage_passes(item_quality, item_sell_in)
-    if item_sell_in < 0
+    if item_sell_in.negative?
       0
     elsif item_sell_in.between?(0, 5)
       item_quality + 3
