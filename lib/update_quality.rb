@@ -20,8 +20,6 @@ class UpdateQuality
     end
   end
 
-  private
-
   def reduce_quality(item_quality)
     if item_quality.negative?
       item_quality - REDUCE_DOUBLE

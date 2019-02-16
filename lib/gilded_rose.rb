@@ -18,8 +18,6 @@ class GildedRose
     end
   end
 
-  private
-
   def sulfuras?(item)
     item.name == "Sulfuras, Hand of Ragnaros"
   end
