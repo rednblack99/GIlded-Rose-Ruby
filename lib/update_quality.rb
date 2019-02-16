@@ -1,4 +1,6 @@
 require_relative './constants'
+require_relative './aged_brie'
+require_relative './backstage_passes'
 
 class UpdateQuality
 
@@ -12,7 +14,7 @@ class UpdateQuality
     if aged_brie?(@item)
       update_aged_brie(@item.quality, @item.sell_in)
     elsif backstage_passes?(@item)
-      update_backstage_passes(@item.quality, @item.sell_in)
+      BackstagePasses.new(@item.quality, @item.sell_in).determine_quality_change
     else
       reduce_quality(@item.quality)
     end
